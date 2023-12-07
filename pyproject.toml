@@ -9,8 +9,8 @@ dependencies=[
     "torchtyping>=0.1.4"
 ]
 
-[tool.setuptools]
-packages = ["bayesrays"]
+[tool.setuptools.packages.find]
+include = ["bayesrays*"]
 
 [project.entry-points.'nerfstudio.dataparser_configs']
 nb-dataparser = 'bayesrays.dataparsers.nerfbusters.nerfbuster_config:nbDataparser'
