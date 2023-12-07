@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import types
 import time
+from tqdm import tqdm
 
 import tyro
 import torch
@@ -310,8 +311,7 @@ class ComputeUncertainty:
         
         pipeline.eval()
         len_train = max(pipeline.datamanager.train_dataset.__len__(), self.iters)
-        for step in range(len_train):
-            print("step",step)
+        for step in tqdm(range(len_train)):
             ray_bundle, batch = pipeline.datamanager.next_train(step)
             output_fn = self.get_output_fn(pipeline.model)
             if not isinstance(pipeline.model, MipNerfModel):
